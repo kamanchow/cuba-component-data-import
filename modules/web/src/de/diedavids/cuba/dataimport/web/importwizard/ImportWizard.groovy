@@ -232,7 +232,7 @@ class ImportWizard extends AbstractWindow {
 
     void closeWizard() {
         if (importConfigurationDs.item.reuse) {
-            importExecutionDs.item.file = importFileHandler.saveFile()
+//            importExecutionDs.item.file = importFileHandler.saveFile()
 
             importWizardService.saveImportConfiguration(
                     importConfigurationDs.item,
@@ -258,9 +258,8 @@ class ImportWizard extends AbstractWindow {
     void startImport() {
         try {
             ImportExecution importExecution = genericDataImporterService.doDataImport(importConfigurationDs.item, importData)
-            importExecutionDs.item = importExecution
+            importExecutionDs.item = dataManager.commit(importExecution)
             importExecutionDs.item.file = importFileHandler.saveFile()
-            dataManager.commit(importExecution)
 
             toStep5()
         } catch (Exception e) {

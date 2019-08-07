@@ -25,7 +25,7 @@ class DataRowImpl implements DataRow {
         def result = new KeyValueEntity()
 
         toMap().each {String k, Object v ->
-            result.setValue(k, v)
+            result.setValue(k, String.valueOf(v))
         }
         result
     }
